@@ -84,8 +84,9 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+&#x27;use strict&#x27;;
+
 var express = require(&#x27;express&#x27;),
-	Router = express.Router,
 	_ = require(&#x27;lodash&#x27;);
 
 
@@ -94,9 +95,9 @@ var defaultActions = require(&#x27;./actions&#x27;),
 
 
 /**
- * 
- * 
- * 
+ *
+ *
+ *
  * @method resource
  * @param options {Object}
  *     @param Model   MongooseModel
@@ -111,7 +112,7 @@ var defaultActions = require(&#x27;./actions&#x27;),
 module.exports = function resource(options) {
 
 	options = options || {};
-	_.defaults(options, defaultOptions)
+	_.defaults(options, defaultOptions);
 
 	// [1] get default actions
 	var actions = options.actions || {};
@@ -124,9 +125,9 @@ module.exports = function resource(options) {
 
 
 	// [3] create router
-	var router = Router(options);
+	var router = express.Router(options);
 
-	// [3.1] // make variables available through middleware 
+	// [3.1] // make variables available through middleware
 	router.use(function (req, res, next) {
 		// Make Model available
 		req.Model = options.Model;
@@ -181,6 +182,7 @@ module.exports = function resource(options) {
 	// [5] return the router
 	return router;
 };
+
     </pre>
 </div>
 

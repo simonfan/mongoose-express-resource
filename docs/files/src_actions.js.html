@@ -84,19 +84,51 @@
 
 <div class="file">
     <pre class="code prettyprint linenums">
+&#x27;use strict&#x27;;
+
 var _ = require(&#x27;lodash&#x27;);
 
 /**
- * 
- * 
- * 
- * 
- */
+Person
+.find({ occupation: /host/ })
+.where(&#x27;name.last&#x27;).equals(&#x27;Ghost&#x27;)
+.where(&#x27;age&#x27;).gt(17).lt(66)
+.where(&#x27;likes&#x27;).in([&#x27;vaporizing&#x27;, &#x27;talking&#x27;])
+.limit(10)
+.sort(&#x27;-occupation&#x27;)
+.select(&#x27;name occupation&#x27;)
+.exec(callback);
+*/
 exports.index = function index(req, res, next) {
 
-	req.Model.find(function(err, entities) {
-		if (err)
-			next(err);
+	// get the query object
+	var query = req.options.parseQuery(req);
+
+	// get criteria
+	var criteria = query.criteria,
+		limit = query.limit || options.limit,
+		sort = query.sort || options.sort,
+		select = query.select || options.select;
+
+
+	var q = req.Model
+		.find(criteria);
+
+	if (limit) {
+		q.limit(limit);
+	}
+
+	if (sort) {
+		q.sort(sort);
+	}
+
+	if (select) {
+		q.select(select);
+	}
+
+	// exec
+	q.exec(function (err, entities) {
+		if (err) next(err);
 
 		res.json(entities);
 	});
@@ -104,10 +136,10 @@ exports.index = function index(req, res, next) {
 
 
 /**
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 exports.create = function create(req, res, next) {
 
@@ -120,9 +152,8 @@ exports.create = function create(req, res, next) {
 	_.assign(model, data);
 
 	// save the model and check for errors
-	model.save(function(err) {
-		if (err) 
-			next(err);
+	model.save(function (err) {
+		if (err) next(err);
 
 		res.json({
 			message: &#x27;success&#x27;
@@ -132,10 +163,10 @@ exports.create = function create(req, res, next) {
 };
 
 /**
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 exports.read = function read(req, res, next) {
 
@@ -144,18 +175,17 @@ exports.read = function read(req, res, next) {
 		id = req.params[idParam];
 
 	var model = req.Model.findById(id, function (err, model) {
-		if (err)
-			next(err);
+		if (err) next(err);
 
 		res.json(model);
 	});
 };
 
 /**
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 exports.update = function update(req, res, next) {
 
@@ -167,18 +197,16 @@ exports.update = function update(req, res, next) {
 
 
 	// use our model model to find the model we want
-	req.Model.findById(id, function(err, model) {
+	req.Model.findById(id, function (err, model) {
 
-		if (err)
-			next(err);
+		if (err) next(err);
 
 		// update the models info
 		_.assign(model, data);
 
 		// save the model
-		model.save(function(err) {
-			if (err)
-				next(err);
+		model.save(function (err) {
+			if (err) 	next(err);
 
 			res.json({ message: &#x27;Model updated!&#x27; });
 		});
@@ -187,10 +215,10 @@ exports.update = function update(req, res, next) {
 };
 
 /**
- * 
- * 
- * 
- * 
+ *
+ *
+ *
+ *
  */
 exports.destroy = function destroy(req, res, next) {
 
@@ -200,13 +228,13 @@ exports.destroy = function destroy(req, res, next) {
 
 	req.Model.remove({
 		_id: id
-	}, function(err, model) {
-		if (err)
-			next(err);
+	}, function (err, model) {
+		if (err) next(err);
 
 		res.json({ message: &#x27;Successfully deleted&#x27; });
 	});
 };
+
     </pre>
 </div>
 

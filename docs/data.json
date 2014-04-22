@@ -17,6 +17,13 @@
             "classes": {},
             "fors": {},
             "namespaces": {}
+        },
+        "src/options.js": {
+            "name": "src/options.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
         }
     },
     "modules": {},
@@ -24,32 +31,33 @@
     "classitems": [
         {
             "file": "src/actions.js",
-            "line": 3,
+            "line": 5,
+            "description": "Person\n.find({ occupation: /host/ })\n.where('name.last').equals('Ghost')\n.where('age').gt(17).lt(66)\n.where('likes').in(['vaporizing', 'talking'])\n.limit(10)\n.sort('-occupation')\n.select('name occupation')\n.exec(callback);",
             "class": ""
         },
         {
             "file": "src/actions.js",
-            "line": 20,
+            "line": 52,
             "class": ""
         },
         {
             "file": "src/actions.js",
-            "line": 48,
+            "line": 79,
             "class": ""
         },
         {
             "file": "src/actions.js",
-            "line": 68,
+            "line": 98,
             "class": ""
         },
         {
             "file": "src/actions.js",
-            "line": 103,
+            "line": 131,
             "class": ""
         },
         {
             "file": "src/index.js",
-            "line": 10,
+            "line": 11,
             "itemtype": "method",
             "name": "resource",
             "params": [
@@ -88,28 +96,38 @@
                 }
             ],
             "class": ""
+        },
+        {
+            "file": "src/options.js",
+            "line": 3,
+            "description": "Person\n.find({ occupation: /host/ })\n.where('name.last').equals('Ghost')\n.where('age').gt(17).lt(66)\n.where('likes').in(['vaporizing', 'talking'])\n.limit(10)\n.sort('-occupation')\n.select('name occupation')\n.exec(callback);",
+            "class": ""
         }
     ],
     "warnings": [
         {
-            "message": "Missing item type",
-            "line": " src/actions.js:3"
+            "message": "Missing item type\nPerson\n.find({ occupation: /host/ })\n.where('name.last').equals('Ghost')\n.where('age').gt(17).lt(66)\n.where('likes').in(['vaporizing', 'talking'])\n.limit(10)\n.sort('-occupation')\n.select('name occupation')\n.exec(callback);",
+            "line": " src/actions.js:5"
         },
         {
             "message": "Missing item type",
-            "line": " src/actions.js:20"
+            "line": " src/actions.js:52"
         },
         {
             "message": "Missing item type",
-            "line": " src/actions.js:48"
+            "line": " src/actions.js:79"
         },
         {
             "message": "Missing item type",
-            "line": " src/actions.js:68"
+            "line": " src/actions.js:98"
         },
         {
             "message": "Missing item type",
-            "line": " src/actions.js:103"
+            "line": " src/actions.js:131"
+        },
+        {
+            "message": "Missing item type\nPerson\n.find({ occupation: /host/ })\n.where('name.last').equals('Ghost')\n.where('age').gt(17).lt(66)\n.where('likes').in(['vaporizing', 'talking'])\n.limit(10)\n.sort('-occupation')\n.select('name occupation')\n.exec(callback);",
+            "line": " src/options.js:3"
         }
     ]
 }

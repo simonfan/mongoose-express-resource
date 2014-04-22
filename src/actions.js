@@ -3,14 +3,45 @@
 var _ = require('lodash');
 
 /**
- *
- *
- *
- *
- */
+Person
+.find({ occupation: /host/ })
+.where('name.last').equals('Ghost')
+.where('age').gt(17).lt(66)
+.where('likes').in(['vaporizing', 'talking'])
+.limit(10)
+.sort('-occupation')
+.select('name occupation')
+.exec(callback);
+*/
 exports.index = function index(req, res, next) {
 
-	req.Model.find(function (err, entities) {
+	// get the query object
+	var query = req.options.parseQuery(req);
+
+	// get criteria
+	var criteria = query.criteria,
+		limit = query.limit || options.limit,
+		sort = query.sort || options.sort,
+		select = query.select || options.select;
+
+
+	var q = req.Model
+		.find(criteria);
+
+	if (limit) {
+		q.limit(limit);
+	}
+
+	if (sort) {
+		q.sort(sort);
+	}
+
+	if (select) {
+		q.select(select);
+	}
+
+	// exec
+	q.exec(function (err, entities) {
 		if (err) next(err);
 
 		res.json(entities);
