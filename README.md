@@ -1,0 +1,3 @@
+# mongoose-express-resource[![Build Status](https://secure.travis-ci.org/simonfan/mongoose-express-resource.png?branch=master)](http://travis-ci.org/simonfan/mongoose-express-resource)
+
+Some module...

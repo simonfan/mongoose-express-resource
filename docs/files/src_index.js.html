@@ -1,0 +1,202 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <title>src/index.js - mongoose-express-resource</title>
+    <link rel="stylesheet" href="http://yui.yahooapis.com/3.9.1/build/cssgrids/cssgrids-min.css">
+    <link rel="stylesheet" href="../assets/vendor/prettify/prettify-min.css">
+    <link rel="stylesheet" href="../assets/css/main.css" id="site_styles">
+    <link rel="shortcut icon" type="image/png" href="../assets/favicon.png">
+    <script src="http://yui.yahooapis.com/combo?3.9.1/build/yui/yui-min.js"></script>
+</head>
+<body class="yui3-skin-sam">
+
+<div id="doc">
+    <div id="hd" class="yui3-g header">
+        <div class="yui3-u-3-4">
+            
+                <h1><img src="../assets/css/logo.png" title="mongoose-express-resource"></h1>
+            
+        </div>
+        <div class="yui3-u-1-4 version">
+            <em>API Docs for: 0.0.0</em>
+        </div>
+    </div>
+    <div id="bd" class="yui3-g">
+
+        <div class="yui3-u-1-4">
+            <div id="docs-sidebar" class="sidebar apidocs">
+                <div id="api-list">
+    <h2 class="off-left">APIs</h2>
+    <div id="api-tabview" class="tabview">
+        <ul class="tabs">
+            <li><a href="#api-classes">Classes</a></li>
+            <li><a href="#api-modules">Modules</a></li>
+        </ul>
+
+        <div id="api-tabview-filter">
+            <input type="search" id="api-filter" placeholder="Type to filter APIs">
+        </div>
+
+        <div id="api-tabview-panel">
+            <ul id="api-classes" class="apis classes">
+            
+            </ul>
+
+            <ul id="api-modules" class="apis modules">
+            
+            </ul>
+        </div>
+    </div>
+</div>
+
+            </div>
+        </div>
+        <div class="yui3-u-3-4">
+                <div id="api-options">
+        Show:
+        <label for="api-show-inherited">
+            <input type="checkbox" id="api-show-inherited" checked>
+            Inherited
+        </label>
+
+        <label for="api-show-protected">
+            <input type="checkbox" id="api-show-protected">
+            Protected
+        </label>
+
+        <label for="api-show-private">
+            <input type="checkbox" id="api-show-private">
+            Private
+        </label>
+        <label for="api-show-deprecated">
+            <input type="checkbox" id="api-show-deprecated">
+            Deprecated
+        </label>
+
+    </div>
+
+
+            <div class="apidocs">
+                <div id="docs-main">
+                    <div class="content">
+                        <h1 class="file-heading">File: src/index.js</h1>
+
+<div class="file">
+    <pre class="code prettyprint linenums">
+var express = require(&#x27;express&#x27;),
+	Router = express.Router,
+	_ = require(&#x27;lodash&#x27;);
+
+
+var defaultActions = require(&#x27;./actions&#x27;),
+	defaultOptions = require(&#x27;./options&#x27;);
+
+
+/**
+ * 
+ * 
+ * 
+ * @method resource
+ * @param options {Object}
+ *     @param Model   MongooseModel
+ *     @param actions Object
+ *         @param index   Function|Boolean
+ *         @param create  Function|Boolean
+ *         @param read    Function|Boolean
+ *         @param update  Function|Boolean
+ *         @param destroy Function|Boolean
+ */
+// returns a built router
+module.exports = function resource(options) {
+
+	options = options || {};
+	_.defaults(options, defaultOptions)
+
+	// [1] get default actions
+	var actions = options.actions || {};
+	_.defaults(actions, defaultActions);
+
+	// [2] middleware
+	var middleware = options.middleware;
+
+
+
+
+	// [3] create router
+	var router = Router(options);
+
+	// [3.1] // make variables available through middleware 
+	router.use(function (req, res, next) {
+		// Make Model available
+		req.Model = options.Model;
+
+		// make action options available
+		req.options = options;
+
+		next();
+	});
+
+	// [4] place routes
+	// [4.1] on the base endpoint
+	var endpoint = router.route(&#x27;/&#x27;);
+	if (actions.index) {
+		if (middleware.index) {
+			endpoint.post(middleware.index);
+		}
+		endpoint.get(actions.index);
+	}
+
+	if (actions.create) {
+		if (middleware.create) {
+			endpoint.post(middleware.create);
+		}
+		endpoint.post(actions.create);
+	}
+
+	// [4.2] on the id endpoint
+	var idEndpoint = router.route(&#x27;/:&#x27; + options.idParam);
+
+	if (actions.read) {
+		if (middleware.read) {
+			idEndpoint.get(middleware.read);
+		}
+		idEndpoint.get(actions.read);
+	}
+
+	if (actions.update) {
+		if (middleware.update) {
+			idEndpoint.put(middleware.update);
+		}
+		idEndpoint.put(actions.update);
+	}
+
+	if (actions.destroy) {
+		if (middleware.destroy) {
+			idEndpoint.delete(middleware.destroy);
+		}
+		idEndpoint.delete(actions.destroy);
+	}
+
+	// [5] return the router
+	return router;
+};
+    </pre>
+</div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<script src="../assets/vendor/prettify/prettify-min.js"></script>
+<script>prettyPrint();</script>
+<script src="../assets/js/yui-prettify.js"></script>
+<script src="../assets/../api.js"></script>
+<script src="../assets/js/api-filter.js"></script>
+<script src="../assets/js/api-list.js"></script>
+<script src="../assets/js/api-search.js"></script>
+<script src="../assets/js/apidocs.js"></script>
+</body>
+</html>

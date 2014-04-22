@@ -1,0 +1,115 @@
+{
+    "project": {
+        "name": "mongoose-express-resource",
+        "version": "0.0.0"
+    },
+    "files": {
+        "src/actions.js": {
+            "name": "src/actions.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        },
+        "src/index.js": {
+            "name": "src/index.js",
+            "modules": {},
+            "classes": {},
+            "fors": {},
+            "namespaces": {}
+        }
+    },
+    "modules": {},
+    "classes": {},
+    "classitems": [
+        {
+            "file": "src/actions.js",
+            "line": 3,
+            "class": ""
+        },
+        {
+            "file": "src/actions.js",
+            "line": 20,
+            "class": ""
+        },
+        {
+            "file": "src/actions.js",
+            "line": 48,
+            "class": ""
+        },
+        {
+            "file": "src/actions.js",
+            "line": 68,
+            "class": ""
+        },
+        {
+            "file": "src/actions.js",
+            "line": 103,
+            "class": ""
+        },
+        {
+            "file": "src/index.js",
+            "line": 10,
+            "itemtype": "method",
+            "name": "resource",
+            "params": [
+                {
+                    "name": "options",
+                    "description": "",
+                    "type": "Object"
+                },
+                {
+                    "name": "Model",
+                    "description": "MongooseModel"
+                },
+                {
+                    "name": "actions",
+                    "description": "Object"
+                },
+                {
+                    "name": "index",
+                    "description": "Function|Boolean"
+                },
+                {
+                    "name": "create",
+                    "description": "Function|Boolean"
+                },
+                {
+                    "name": "read",
+                    "description": "Function|Boolean"
+                },
+                {
+                    "name": "update",
+                    "description": "Function|Boolean"
+                },
+                {
+                    "name": "destroy",
+                    "description": "Function|Boolean"
+                }
+            ],
+            "class": ""
+        }
+    ],
+    "warnings": [
+        {
+            "message": "Missing item type",
+            "line": " src/actions.js:3"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/actions.js:20"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/actions.js:48"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/actions.js:68"
+        },
+        {
+            "message": "Missing item type",
+            "line": " src/actions.js:103"
+        }
+    ]
+}
