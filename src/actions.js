@@ -15,8 +15,10 @@ Person
 */
 exports.index = function index(req, res, next) {
 
+	var options = req.options;
+
 	// get the query object
-	var query = req.options.parseQuery(req);
+	var query = options.parseQuery(req);
 
 	// get criteria
 	var criteria = query.criteria,
