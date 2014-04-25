@@ -86,11 +86,22 @@ exports.create = function create(req, res, next) {
  */
 exports.read = function read(req, res, next) {
 
+	var options = req.options,
 		// get the id
-	var idParam = req.options.idParam,
-		id = req.params[idParam];
+		id = req.params[options.idParam],
+		// get the query
+		query = options.parseQuery(req),
+		// get whatever is to be selected.
+		select = query.select || options.select;
 
-	var model = req.Model.findById(id, function (err, model) {
+
+	var q = req.Model.findById(id);
+
+	if (select) {
+		q.select(select);
+	}
+
+	q.exec(function (err, model) {
 		if (err) next(err);
 
 		res.json(model);
